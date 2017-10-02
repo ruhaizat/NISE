@@ -18,22 +18,7 @@ class Sijilpeserta extends CI_Controller {
 	}
 
 	public function index()
-	{
-
-        //$data['vehicles'] = $this->model_vehicle->getAll();
-        $data['kursus'] = $this->model_kursus->getAll();
-        //$data['customers'] = $this->model_vehicle->customerList();
-        //$data['manufacturers_group'] = $this->model_vehicle->getAllByManufacturer();
-        //$data['manufacturers_group_sold'] = $this->model_vehicle->getAllByManufacturerSold();
-        
-        // $data['vehicle_by_month'] = $this->model_vehicle->get_vehicle_by_month();
-
-        $data['employees'] = $this->model_employee->getAll();
-    	$data['user'] = $this->session->userdata;
-
-    	// die(var_dump($data['manufacturers_group']));
-
-    	$this->parser->parse('admin/view_sijilpeserta', $data);
+	{		if($this->session->userdata('kod_kumppengguna') == "5" ){			$data['kursus'] = $this->model_kursus->getAll();			$data['employees'] = $this->model_employee->getAll();			$data['user'] = $this->session->userdata;			$this->parser->parse('admin/view_sijilpeserta', $data);				}else{			$data["moduleStr"] = "Sijil Peserta";			$this->load->view('admin/view_not_allowed', $data);				}
 	}
 
 	public function logout()

@@ -15,8 +15,13 @@ class Kategorisijil extends CI_Controller {
 	/**************************  START FETCH OR VIEW FORM DATA ***************/
 	public function index()
 	{
-		$this->data['view_data']= $this->kategorisijil->view_data();
-	    $this->load->view('admin/view_kategorisijil', $this->data, FALSE);
+		if($this->session->userdata('kod_kumppengguna') == "1" ){
+			$this->data['view_data']= $this->kategorisijil->view_data();
+			$this->load->view('admin/view_kategorisijil', $this->data, FALSE);			
+		}else{
+			$data["moduleStr"] = "Kategori Sijil";
+			$this->load->view('admin/view_not_allowed', $data);		
+		}
 	}
 	/****************************  END FETCH OR VIEW FORM DATA ***************/
 

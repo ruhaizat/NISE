@@ -14,10 +14,17 @@ class Pengguna extends CI_Controller {
                 
 	}
 	public function index()
-	{	
-        $data['emp'] = $this->model_pengguna->getAll();
+	{			
+		if($this->session->userdata('kod_kumppengguna') == "1"){
+			$data['emp'] = $this->model_pengguna->getAll();
 
-        $this->parser->parse('admin/view_pengguna', $data);  
+			$this->parser->parse('admin/view_pengguna', $data);  		
+		}else{
+			$data["moduleStr"] = "Pengguna";
+			$this->load->view('admin/view_not_allowed', $data);	
+		}
+		
+
     }
 
 	public function add()

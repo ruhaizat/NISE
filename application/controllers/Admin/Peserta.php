@@ -15,8 +15,13 @@ class Peserta extends CI_Controller {
 	/**************************  START FETCH OR VIEW FORM DATA ***************/
 	public function index()
 	{
-		$this->data['view_data']= $this->peserta->view_data();
-	    $this->load->view('admin/view_peserta', $this->data, FALSE);
+		if($this->session->userdata('kod_kumppengguna') == "1" or $this->session->userdata('kod_kumppengguna') == "2" or $this->session->userdata('kod_kumppengguna') == "3" or $this->session->userdata('kod_kumppengguna') == "4"){
+			$this->data['view_data']= $this->peserta->view_data();
+			$this->load->view('admin/view_peserta', $this->data, FALSE);			
+		}else{
+			$data["moduleStr"] = "Peserta";
+			$this->load->view('admin/view_not_allowed', $data);	
+		}
 	}
 	/****************************  END FETCH OR VIEW FORM DATA ***************/
 

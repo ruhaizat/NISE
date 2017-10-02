@@ -55,17 +55,18 @@
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="<?= base_url('Admin/dashboard'); ?>"><i class="fa fa-home"></i> Utama </a></li>
-                  <li><a href="<?= base_url('Admin/sijilpeserta'); ?>"><i class="fa fa-file"></i>
-                  Sijil</a></li>
-                 
-                  <?php if($this->session->userdata('kod_kumppengguna') != "5" ) : ?>
-                  <li>
-                    <a><i class="fa fa-user"></i>Peserta<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
+				  <?php if($this->session->userdata('kod_kumppengguna') == "5") : ?>
+                  <li><a href="<?= base_url('Admin/sijilpeserta'); ?>"><i class="fa fa-file"></i>Sijil</a></li>
+				  <?php endif;?>
+				  <?php if($this->session->userdata('kod_kumppengguna') == "1" or $this->session->userdata('kod_kumppengguna') == "2" or $this->session->userdata('kod_kumppengguna') == "3" or $this->session->userdata('kod_kumppengguna') == "4") : ?>
+                  <li><a><i class="fa fa-user"></i>Peserta<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
                       <li><a href="<?= base_url('Admin/peserta'); ?>"><i class="fa fa-list"></i>Senarai Peserta</a></li>
                       <li><a href="#"><i class="fa fa-folder"></i>Muat Naik Pukal</a></li>
-                      </ul>
-                 </li>
+                    </ul>
+                  </li>
+				  <?php endif;?>
+				  <?php if($this->session->userdata('kod_kumppengguna') == "1" ) : ?>
                   <li><a><i class="fa fa-edit"></i> Pentadbiran<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?= base_url('Admin/pengguna'); ?>"><i class="fa fa-list"></i>Senarai Pengguna</a></li>
@@ -82,19 +83,9 @@
                       <li><a href="#"><i class="fa fa-table"></i>Jenis Kursus</a></li>
                     </ul>
                  </li>
+				  <?php endif;?>
                   <li><a href="<?php echo base_url() . 'Admin/dashboard/logout'; ?>"><i class="fa fa-sign-out"></i> Log Keluar</a></li>
                   </li>
-                  
-                   
-                   
-                  <!--<li><a><i class="fa fa-table"></i> Vehicles <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?= base_url('admin/vehicles'); ?>">All Vehicles</a></li>
-                      <li><a href="<?= base_url('admin/vehicles/soldlist'); ?>">Sold Vehicles</a></li>
-                    </ul>
-                  </li>
-                </ul>-->
-                 <?php endif; ?>
               </div>
             </div>
             <!-- /sidebar menu -->
