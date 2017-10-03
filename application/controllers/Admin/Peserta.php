@@ -15,13 +15,9 @@ class Peserta extends CI_Controller {
 	/**************************  START FETCH OR VIEW FORM DATA ***************/
 	public function index()
 	{
-		if($this->session->userdata('kod_kumppengguna') == "1" or $this->session->userdata('kod_kumppengguna') == "2" or $this->session->userdata('kod_kumppengguna') == "3" or $this->session->userdata('kod_kumppengguna') == "4"){
-			$this->data['view_data']= $this->peserta->view_data();
-			$this->load->view('admin/view_peserta', $this->data, FALSE);			
-		}else{
-			$data["moduleStr"] = "Peserta";
-			$this->load->view('admin/view_not_allowed', $data);	
-		}
+		$this->data['view_data']= $this->peserta->view_data();
+	    $this->load->view('admin/view_peserta', $this->data, FALSE);
+        $this->load->view('admin/view_naikpukalPeserta', $this->data, FALSE);
 	}
 	/****************************  END FETCH OR VIEW FORM DATA ***************/
 
@@ -66,34 +62,51 @@ class Peserta extends CI_Controller {
     $this->load->view('admin/kemaskiniPeserta', $this->data, FALSE);
     }
     /****************************  END OPEN EDIT FORM WITH DATA ***************/
-
+    
+    
     /****************************  START UPDATE DATA *************************/
-    public function update_data()
+    public function update_data($id)
     {
-                  $id = $this->input->post('id');
-			      $nama_peserta = $this->input->post('nama_peserta');
-			      $no_mykad = $this->input->post('no_mykad');
-			      $no_telbimbit = $this->input->post('no_telbimbit');
-			      $tarikh_kemaskini = date("m/d/y h:i:s");
-			      $kod_stsbyrn = $this->input->post('kod_stsbyrn');
-
-    //$this->db->where('kod_sijil', $kod_sijil);
-    $this->Model_peserta->update($nama_peserta,$no_mykad,$no_telbimbit,$kod_stsbyrn,$tarikh_kemaskini);
-    //$this->db->update('tbl_peserta', $data);
+    $data = array('id' => $id,
+                  'nama_peserta' => $this->input->post('nama_peserta'),
+                  'no_mykad' => $this->input->post('no_mykad'),
+                  'no_telbimbit' => $this->input->post('no_telbimbit'),
+                  'kod_stsbyrn' => $this->input->post('kod_stsbyrn'),
+                  'tarikh_kemaskini' => date("m/d/y h:i:s"));
+    $this->db->where('id', $id);
+    $this->db->update('tbl_peserta', $data);
     $this->session->set_flashdata('message', 'Maklumat anda berjaya dikemaskini.');
     redirect('Admin/Peserta');
     }
     /****************************  END UPDATE DATA ****************************/
 
-
     /****************************  START DELETE DATA **************************/
     public function delete_data($id)
     {  
     $this->db->where('id', $id);
-    $this->db->delete('tbl_kategorisijil');
-    $this->session->set_flashdata('message', 'Maklumat anda berjaya dihapuskan.');
-    redirect('Admin/kategorisijil');
+    $this->db->delete('user_data');
+    $this->session->set_flashdata('message', 'Your data deleted Successfully..');
+    redirect('Admin/welcome');
     }
     /****************************  END DELETE DATA ***************************/
+
+/****************************  START FETCH OR VIEW FORM DATA ***************/
+    public function muatnaikPukal()
+    {
+    $this->data['view_data']= $this->peserta->view_data();
+    $this->load->view('admin/view_naikpukalPeserta', $this->data, FALSE);
+    }
+    /****************************  END FETCH OR VIEW FORM DATA ***************/
+
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -44,9 +44,9 @@
         <br>
         <label for="Status Bayaran">Status Bayaran</label>
         <select class="form-control" name="kod_stsbyrn" >
-                                <option value="<?php echo $data['kod_stsbyrn']; ?>">SELESAI</option>
-                                <option value="<?php echo $data['kod_stsbyrn']; ?>">BELUM SELESAI</option>
-                                <option value="<?php echo $data['kod_stsbyrn']; ?>">PERCUMA</option>
+                                <option value="1" <?php if($data['kod_stsbyrn'] == 1):echo 'selected';endif;?>>SELESAI</option>
+                                <option value="2" <?php if($data['kod_stsbyrn'] == 2):echo 'selected';endif;?>>BELUM SELESAI</option>
+                                <option value="3" <?php if($data['kod_stsbyrn'] == 3):echo 'selected';endif;?>>PERCUMA</option>
                             </select>
         <label for="tarikh_kemaskini"></label>
         <input type="hidden" class="form-control" name="tarikh_kemaskini" value="<?php echo $data['tarikh_kemaskini']; ?>">
